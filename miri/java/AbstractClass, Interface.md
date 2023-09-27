@@ -23,7 +23,24 @@
 구현되지 않은 추상 메서드와 상수만을 포함하는 것을 말함
 ```
 
-> 추상클래스보다 추상화 정도가 높다고 할 수 있다
+> 모든 멤버들을 추상적으로 정의하기 때문에 추상클래스보다 추상화 정도가 높다고 할 수 있다
+>
+> > 하지만 자바 8부터는 Default Method을 사용할 수 있게 되었다
+
+> > -> 이는 즉 인터페이스 내에서 기능을 구현하여 모든 클래스에서 재정의를 하지 않고 메서드 사용을 가능하게 하는것이다
+
+```
+// interface 키워드를 통한 인터페이스 생성
+public interface InterfaceTest {
+  //
+    void abstractMethod();
+
+	// default method 생성 (자바 8 이상)
+    default int defaultMethod(){
+    	System.out.println("default method");
+    }
+}
+```
 
 - interface 키워드를 이용하여 정의하고, 인터페이스는 다른 인터페이스를 상속받을 수 있다 (또한 다중상속이 가능하다)
 
