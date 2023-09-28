@@ -48,3 +48,27 @@ Java에서 객체를 생성(정의)하기 위해 만들어 사용하는 틀
 > 같은 틀을 사용하더라도 여러 종류의 붕어빵을 만들 수 있다
 
     -> 만들어진 객체들은 서로 다른 고유한 값을 가진다
+
+**Student 클래스의 인스턴스 생성 예제**
+
+```
+public class ObjectDemo {
+    public static void main(String[] args) {
+
+      // Student 클래스의 객체(인스턴스)를 생성
+      Student student1 = new Student("박미리", 100);
+    }
+}
+
+class Student {
+
+    // 생성된 인스턴스는 name, age 값을 가진다
+    String name;
+    int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+```
