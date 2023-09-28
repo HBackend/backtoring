@@ -50,7 +50,7 @@ public interface InterfaceTest {
 
 ---
 
-### 인터페이스와 추상메서드의 비교
+### 인터페이스와 추상클래스의 비교
 
 인터페이스와 추상메서드는 크게보면 비슷한 면이 있지만, 핵심적인 차이 여러가지가 있다
 
@@ -64,13 +64,33 @@ public interface InterfaceTest {
 
 #### 차이점
 
-**_추상메서드_**
+**_추상클래스_**
 
-- `public`, `protected`, `private` 등 다양하게 접근제어자를 사용할 수 있다
+- `public`, `default`, `protected` 등 다양한 접근제어자를 사용할 수 있다
 
 - 자식에서 상속받아 사용하는 경우에 생성자를 사용할 수 있다
 
 - 다중 상속이 불가능하다
+
+**추상클래스 사용 예제**
+
+```
+public abstract class Animal {
+    public String name;
+
+    public Animal(String name) {
+        this.name = name;
+    }
+    public void sleep() {
+        System.out.println("동물은 잠을 잔다");
+    }
+    // 추상메서드 선언
+    public abstract void bark();
+
+    protected abstract void eat();
+
+}
+```
 
 **_인터페이스_**
 
@@ -79,3 +99,20 @@ public interface InterfaceTest {
 - 생성자를 사용할 수 없다 (상수만을 가지기 때문에 사용할 경우가 없다)
 
 - 다중 상속이 가능하다
+
+**인터페이스 사용 예제**
+
+```
+public interface Interface {
+    // 멤버변수는 항상 명시적으로 public static final 으로 선언된다
+    int MAX_AGE = 100;
+
+    // 디폴트메서드가 아닌 경우, 항상 명시적으로 abstract 으로 선언된다
+    void move();
+
+    // 기본적인 기능을 구현하는 디폴트메서드
+    default void breathe() {
+        System.out.println("동물은 숨을 쉰다");
+    }
+}
+```
