@@ -105,3 +105,37 @@ Animal.food();
 ```
 
 > 호출시 `인터페이스명`.`메서드명` 형식으로 호출해야함
+
+
+## Funtional Interface
+- 함수형 인터페이스는 오직 1개의 추상 메서드를 갖는 인터페이스이다.
+- 자바의 람다식은 함수형 인터페이스로만 접근이 가능하다.
+  - 람다식을 사용하여 익명함수(클래스 정의 없이 메서드 내에서 클래스 선언과 동시에 객체를 생성함)를 간결하게 표현하기 위한 방법이다.
+- `@FunctionalInterface` 어노테이션을 사용하여 함수형 인터페이스를 선언할 수 있음.
+  - 함수형 인터페이 조건이 맞는지 검사
+```java
+@FunctionalInterface
+interface Hello {
+  public void sayHi(String name);
+}
+
+public class FI {
+  public static void main(String[] args) {
+    Hello hello = new Hello() {
+      @Override
+      public void sayHi(String name) {
+        System.out.println("Hi " + name);
+      }
+    };
+
+    hello.sayHi("HomeBase");
+  }
+}
+```
+```java
+Hello hello = name -> System.out.println("Hi " + name);
+hello.sayHi("HomeBase");
+```
+
+- 두 코드의 실행결과는 같으며 2번째 방법이 더 간결하고 가독성이 좋다.
+- 함수형 인터페이스를 람다식을 사용해 표현한 것이다.
