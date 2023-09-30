@@ -75,6 +75,25 @@ int[] array = new int[3];
 - 값을 넣는 순서대로 저장한다
 - 값을 꺼낼 때 숫자 인덱스를 사용하여 꺼낸다
 
+> 아래 기능을 사용하면 List에 저장된 값들에 대해 특정 기준에 따라 순차적으로 정렬해줄 수 있다
+>
+> > Collections.sort(list name);
+
+        오름차순으로 정렬, 대문자가 우선순위가 높음
+
+> > Collections.sort(list name, Collections.reverseOrder());
+
+        내림차순으로 정렬
+
+
+> > Collections.sort(list name, String.CASE_INSENSITIVE_ORDER);
+
+        대소문자 구분 없이 오름차순으로 정렬
+
+> > Collections.sort(list name, Collections.reverseOrder(String.CASE_INSENSITIVE_ORDER));
+
+        대소문자 구분 없이 내림차순으로 정렬
+
 예)
 
 `ArrayList`, `LinkedList`
