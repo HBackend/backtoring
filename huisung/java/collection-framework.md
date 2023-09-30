@@ -65,7 +65,8 @@ while(iter.hasNext()) {
 
 ### Map
 - key, value를 쌍으로 저장하는 자료구조이며 키는 중복될 수 없고, 값은 중복이 가능하다.
-- 구현체로는 HashMap, TreeMap이 있다.
+- Map은 인터페이스 이며 구현체로는 HashMap, TreeMap이 있다.
+  > HashMap은 Map 인터페이스룰 구현하는 클래스 이다.
 
 ```java
 Map<String, String> map = new HashMap<>();
