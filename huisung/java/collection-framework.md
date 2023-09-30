@@ -30,6 +30,8 @@
 - 컬렉션의 자료를 순회할때 사용하는 이터레이어 객체를 관리하는 인터페이스이다.
   > `Map`은 interable 인터페이스를 상속받지 않기 때문에 Map 컬렉션을 직접적으로 순회할 순 없고 스트림을 사용하거나 루프문으로 순회해야함
 - 메서드로는 ```ITerator<T> iterator()``` 등이 있다.
+
+
 ### List
 - List 인터페이스는 순서를 유지하며 중복 저장을 허용한다.
 - 구현체로는 ArrayList, LinkedList가 있다.
@@ -49,6 +51,19 @@ for (int i = 0; i < list.size(); i++) {
     String str = list.get(i);
     System.out.println(str);
 }
+```
+
+#### 정렬
+- `Collections` 객체의 `.sort()` 메서드를 사용하여 리스트의 요소들을 정렬할 수 있다.
+
+- 오름차순 정렬
+```java
+Collections.sort(list);
+```
+
+- 내림차순 정렬
+```java
+Collections.sort(list, Collections.reverseOrder());
 ```
 
 ### Set
