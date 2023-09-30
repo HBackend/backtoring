@@ -96,3 +96,29 @@ int[] array = new int[3];
 예)
 
 `HashMap`, `TreeMap`, `Hashtable`
+
+---
+
+#### Stack
+
+```
+List의 Vector 클래스를 상속받는, LIFO(Last In First Out, 후입선출) 구조의 자료구조 클래스
+```
+
+- top의 위치에 따라 데이터를 쌓는다
+
+`push` 값을 넣는 순서대로 쌓는 것
+
+`pop` 최근에 push한 순서대로 값을 빼는 것
+
+#### Queue
+
+```
+FIFO(First In First Out, 선입선출) 형식의 자료구조로, 인터페이스 형식이다
+```
+
+- 한 쪽(rear)에서만 삽입이 이루어지고, 반대쪽(front)에서는 삭제만 이루어진다
+
+`enqueue` 큐에 자료를 넣는 것
+
+`dequeue` 넣어둔 자료부터 순서대로 꺼내는 것
