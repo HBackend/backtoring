@@ -39,7 +39,7 @@
   - 배열과 차이점으론 배열은 한번 생성하면 크기를 변경할 수 없지만 리스트 자료구조는 저장공간이 필요에 따라 자유롭다.
 
 ```java
-List<String> list = new AarrayList<>();
+List<String> list = new ArrayList<>();
 // 데이터 저장
 list.add("hello");
 list.add("hello world");
