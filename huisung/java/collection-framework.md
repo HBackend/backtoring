@@ -7,11 +7,20 @@
 - `List`, `Set`은 공통된 부분이 많아 `Collection`이라는 상위 인터페이스가 정의되어있다.
 - `Map`은 둘과 달리 키와 값을 쌍으로 관리하는 구조라서 독립된 인터페이스이다.
 
-| interface | 설명                                        | 구현클래스                          |
-|-----------|-------------------------------------------|--------------------------------|
-| List      | 순서 O, 데이터 중복 O                            | ArrayList, LinkedList ... |
-| Set       | 순서 X, 데이터 중복 X                            | HashSet, TreeSet...            |
-| Map       | <Ket, Value>가 쌍으로 저장, 순서 X, (키가 다르면) 중복 O | HashMap, TreeMap, Hashtable... |
+**Stack과 Queue**   
+- Queue (인터페이스)
+  - 선입선출(FIFO) 구조이다. (처음 들어온 원소가 가장 먼저 나온다.)
+  - Queue는 인터페이스이며 구현체로는 (ArrayQueue, PrioriyQueue) 가 있다.
+- Stack (클래스)
+  - 후입선출(LIFO) 구조이다. 마지막에 들어온 원소가 처음으로 나간다.
+  - push, pop 메서드를 사용
+
+
+| interface | 설명                                        | 구현클래스                            |
+|-----------|-------------------------------------------|----------------------------------|
+| List      | 순서 O, 데이터 중복 O                            | ArrayList, LinkedList, Stack ... |
+| Set       | 순서 X, 데이터 중복 X                            | HashSet, TreeSet...              |
+| Map       | <Ket, Value>가 쌍으로 저장, 순서 X, (키가 다르면) 중복 O | HashMap, TreeMap, Hashtable...   |
 
 ### List
 - List 인터페이스는 순서를 유지하며 중복 저장을 허용한다.
