@@ -1,4 +1,4 @@
-# URI, URL
+# URI, URL, URN
 
 ## URI (Uniform Resource Identifier)
 - 통합 자원 식별자이다. 인터넷에 있는 자원이 어디에 있는지 자원 자체를 식별하는 문자열이다.
