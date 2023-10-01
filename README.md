@@ -19,12 +19,12 @@ Backtoring 과제 리퍼지토리입니다.
 ### Java & OOP
 주제 | 완료 |
 --|--
-클래스, 객체, 인스턴스 | ❌
-추상클래스와 인터페이스 | ❌
-오버라이딩, 오버로딩 | ❌
-컬렉션즈 프레임워크 | ❌
-래퍼(Wrapper) 클래스 | ❌
-생성자, getter, setter |  ❌
+클래스, 객체, 인스턴스 | ✅
+추상클래스와 인터페이스 | ✅
+오버라이딩, 오버로딩 | ✅
+컬렉션즈 프레임워크 | ✅
+래퍼(Wrapper) 클래스, 오토 래핑, 언래핑 | ❌
+생성자, getter, setter, builder |  ❌
 Optional 클래스 | ❌
 Exception, RuntimeException | ❌
 try catch, throws, throw | ❌
@@ -37,10 +37,10 @@ SOLID 원칙 | ❌
 ### Spring
 주제 | 완료 |
 --|--
-Spring, Spring Boot | ❌
+Spring, Spring Boot | ✅
 DTO, DAO, VO, Entity | ❌
 Controller, Service, Repository | ❌
-Spring 프로젝트 패키지 구조 | ❌
+RequestBody, ResponseBody | ❌
 Spirng Data JPA | ❌
 Lombok | ❌
 Spring URL Mapping | ❌
