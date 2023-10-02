@@ -11,6 +11,14 @@
     int num1 = null; // error
     Integer num2 = null;
     ```
+  - 또한, `null` 값을 명시적으로 처리하여 예외 처리를 할 수 있다. 
+  - ```java
+    if (result == null) {
+        ...
+    } else {
+        ...
+    }
+    ```
 
 | 기본 자료형  | Wrapper class |   
 |---------|--------|
