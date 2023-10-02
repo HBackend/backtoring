@@ -1,27 +1,34 @@
 ## WrapperClass
 
-자바에서는 아래와 같은 8가지의 기본타입을 제공한다
+자바에서는 아래와 같은 8가지의 원시형 타입을 제공한다
 
 ```java
 byte, short, int, long, float, double, char, boolean, void
 ```
 
-하지만 이러한 데이터들의 기본타입으로는 메서드나 필드 등 객체의 특성을 활용할 수 없기 때문에,  
-위의 타입들을 객체화시켜 사용할 수 있도록 한 것이 WrapperClass이다
+하지만 이러한 원시형 타입의 데이터들로는 메서드나 필드 등 객체의 특성을 활용할 수 없기 때문에,  
+원시형 타입의 데이터를 객체화시켜 참조형 타입으로 사용할 수 있도록 한 것이 WrapperClass이다
+
+> ### 원시형(Primitive)타입과 참조형(Reference) 타입
+
+> `원시형 타입` 메모리 상에 실제 값을 저장하는 타입  
+> `참조형 타입` 메모리 상에서 객체의 참조(주소)를 저장하는 타입
+
+> 참조형 타입은 객체의 기반이 되므로 객체지향 프로그래밍에 있어 사용될 수 있는 범위가 넓다
 
 #### WrapperClass (래퍼클래스) 의 형태
 
-| 기본타입 | 래퍼클래스 |
-| -------- | ---------- |
-| byte     | Byte       |
-| short    | Short      |
-| int      | Integer    |
-| long     | Long       |
-| float    | Float      |
-| double   | Double     |
-| char     | Character  |
-| boolean  | Boolean    |
-| void     | Void       |
+| 기본타입(원시형 타입) | 래퍼클래스 |
+| --------------------- | ---------- |
+| byte                  | Byte       |
+| short                 | Short      |
+| int                   | Integer    |
+| long                  | Long       |
+| float                 | Float      |
+| double                | Double     |
+| char                  | Character  |
+| boolean               | Boolean    |
+| void                  | Void       |
 
 - 래퍼클래스에는 오토래핑을 위한 메서드가 포함되어있다
   ( ex.intValue() 등등 )
