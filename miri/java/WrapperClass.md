@@ -30,6 +30,12 @@ byte, short, int, long, float, double, char, boolean, void
 
 - 데이터에 Null 처리가 필요한 경우에도 래퍼클래스를 사용할 수 있다
 
+> 하지만 래퍼클래스 null값을 대입할 수는 있지만, 연산 또는 메서드 호출에 null 값이 사용되면 NPE가 발생하는 어려움이 있다
+
+> ### NPE(NullPointException) 란?
+>
+> 객체 참조가 null을 가리킬 때 해당 참조를 이용하여 연산이나 메서드 호출을 시도하면 발생하는 Runtime Exception
+
 ---
 
 이처럼 기본타입을 래퍼클래스로 변환하는 것을 `래핑`, 반대로 래퍼클래스를 기본타입으로 변환하는 것을 `언래핑`이라고 한다.
