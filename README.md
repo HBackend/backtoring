@@ -23,8 +23,8 @@ Backtoring 과제 리퍼지토리입니다.
 추상클래스와 인터페이스 | ✅
 오버라이딩, 오버로딩 | ✅
 컬렉션즈 프레임워크 | ✅
-래퍼(Wrapper) 클래스, 오토 래핑, 언래핑 | ❌
-생성자, getter, setter, builder |  ❌
+래퍼(Wrapper) 클래스, 오토 래핑, 언래핑 | ✅
+생성자, getter, setter, builder |  ✅
 Optional 클래스 | ❌
 Exception, RuntimeException | ❌
 try catch, throws, throw | ❌
@@ -38,7 +38,7 @@ SOLID 원칙 | ❌
 주제 | 완료 |
 --|--
 Spring, Spring Boot | ✅
-DTO, DAO, VO, Entity | ❌
+DTO, DAO, VO, Entity | ✅
 Controller, Service, Repository | ❌
 RequestBody, ResponseBody | ❌
 Spirng Data JPA | ❌
@@ -55,7 +55,7 @@ Spring Boot 에러 핸들링 | ❌
 ### Computer-Science
 주제 | 완료 |
 --|--
-URI, URL | ❌
+URI, URL, URN | ✅
 IP와 Port란 | ❌
 DNS란 | ❌
 TCP, UDP | ❌
