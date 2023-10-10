@@ -18,15 +18,15 @@
 **런타임**
 - 컴파일 과정을 마친 후 응용프로그램이 **실제로 실행되는 과정**이다.
 
-### 컴파일 예외
+### 일반 예외
 - 컴파일 과정에서 발견되는 예외이다.
 - Exception을 상속받는다.
-> IOException 같은 예외이다.
+> IOException, NoSuchFieldException, NoSuchMethodException 같은 예외이다.
 
 ### 런타임 예외
 - 컴파일 과정에서 예외 처리 코드를 검사하지 않는 예외이다.
 - RuntimeException과 Exception을 상속받는다.
-> NullPointerException 같은 예외이다.
+> NullPointerException, ArithmeticException, OutOfMemoryException 같은 예외이다.
 > try-catch 문을 사용하여 예외 처리 가능
 
 ![](https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/xTa/image/EV_9X_vwDtwXTsoqr6cviQLUTAg.png)
