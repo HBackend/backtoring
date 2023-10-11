@@ -42,6 +42,30 @@ public static void main(String[]args){
 }
 ```
 
+### try-with-resource
+- `try-catch`의 변형 문법이다. `try-with-resource` 는 자원을 할당하는 부분을 명시하면 try 블록이 끝날 때 자동으로 할당한 자원을 해제해준디.
+
+```java
+try (자원을 할당하는 부분) {
+    ...
+}
+```
+
+> 예시
+```java
+public class Main {
+    public static void main(String[] args) {
+        String str;
+        try (
+            Scanner scanner = new Scanner();
+        ) { str = scanner.next(); }
+        finally {
+            System.out.println(str);
+        }
+    }
+}
+```
+
 
 ## throws
 - 자신을 호출하는 메서드에 예외처리를 떠넘기는 것이다.
