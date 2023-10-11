@@ -25,9 +25,9 @@ Backtoring 과제 리퍼지토리입니다.
 컬렉션즈 프레임워크 | ✅
 래퍼(Wrapper) 클래스, 오토 래핑, 언래핑 | ✅
 생성자, getter, setter, builder |  ✅
-Optional 클래스 | ❌
-Exception, RuntimeException | ❌
-try catch, throws, throw | ❌
+Optional 클래스 | ✅
+Exception, RuntimeException | ✅
+try catch, throws, throw | ✅
 객체지향의 4원칙 | ❌
 SOLID 원칙 | ❌
 자바 리플랙션 | ❌
