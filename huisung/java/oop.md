@@ -127,3 +127,38 @@ class Developer extends Person {
 }
 ```
 
+## 스프링에서 찾아볼 수 있는 객체지향 4원칙
+
+### 상속
+- 데이터 엑세스 작업을 하려는 인터페이스에 `JpaRepository` 라는 인터페이스를 상속받으면 Jpa를 사용하여 데이터 엑세스 작업을 쉽게 도와준다.
+- ```java
+  public interface UserRepository extends JpaRepository<User, Long> { ... }
+  ```
+### 다형성
+- DI로 예를 들면 인터페이스를 구현한 여러개의 클래스 중 하나를 선택하여 인터페이스를 주입 받는다.
+- ```java
+  @RequiredArgsConstructor
+  public class MiriController {
+    private final MiriService miriService;
+  }
+  ```
+### 추상화
+- 객체의 속성과 기능을 추상화해 단순하게 표현하여 일관되고 쉽게 사용할 수 있다.
+- `JpaRepository` 를 사용한다면 복잡한 SQL 쿼리를 사용하지 않고 데이터베이스 연결을 추상화할 수 있다.
+- ```java
+  public class UserRepository extends JpaRepository<User, Long> {
+    // ...
+  }
+  ```
+### 캡슐화
+- 스프링부트의 `lombok` 디펜던시의 어노테이션으로 캡슐화를 쉽게 구현할 수 있다.
+- ```java
+  @Getter // getter 생성
+  @Builder
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public class LoginDto {
+    private String username;
+    private String password;
+  }
+  ```
