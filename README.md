@@ -28,7 +28,7 @@ Backtoring 과제 리퍼지토리입니다.
 Optional 클래스 | ✅
 Exception, RuntimeException | ✅
 try catch, throws, throw | ✅
-객체지향의 4원칙 | ❌
+객체지향의 4원칙 | ✅
 SOLID 원칙 | ❌
 자바 리플랙션 | ❌
 
