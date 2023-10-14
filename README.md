@@ -39,13 +39,15 @@ SOLID 원칙 | ❌
 --|--
 Spring, Spring Boot | ✅
 DTO, DAO, VO, Entity | ✅
-Controller, Service, Repository | ❌
-RequestBody, ResponseBody | ❌
-Spirng Data JPA | ❌
-Lombok | ❌
-Spring URL Mapping | ❌
+JDBC, DataSource | ❌
+Spirng Data JPA, ORM | ❌
 Spring IoC, DI, Bean | ❌
+Application Context | ❌
+RequestBody, ResponseBody | ❌
+Spring URL HandlerMapping | ❌
+Spring Security | ❌
 Spring AOP | ❌
+Spring Filter, Interceptor | ❌
 Layerd Architecture | ❌
 Spring Boot 에러 핸들링 | ❌
 
@@ -82,3 +84,15 @@ DDL, DML, DCL | ❌
 SQL WHERE 조건절 | ❌
 SQL GROUP BY, ORDER BY | ❌
 JOIN | ❌
+
+
+<br>
+
+### 실습 과제
+주제 | 완료 |
+--|--
+Spring OAuth, Google 로그인 구현해보기 | ❌
+Spring GAuth 사용해보기 | ❌
+외부 OpenAPI 사용해보기 | ❌
+Socket STOMP로 채팅 서버 만들기 | ❌
+
