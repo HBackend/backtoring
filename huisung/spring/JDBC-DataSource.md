@@ -42,3 +42,5 @@ public class UserJdbcRepository {
   - ```jdbcTemplate.query(sql, RowMapper 구현 익명클래스)```
 
 ## DataSource
+
+- 데이터베이스와의 연결을 관리하는 객체로 데이터베이스와 관련된 연결 정보를 포함하여 디비의 빠른 연결을 제공한다.
