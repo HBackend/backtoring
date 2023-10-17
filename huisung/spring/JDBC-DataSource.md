@@ -2,11 +2,54 @@
 
 ## JDBC
 - DB에 쉽게 접근할 수 있도록 도와주는 자바의 API이다.
-- JDBC를 사용하면 종속적이지 않은 DB연동을 구현할 수 있다.
-> ex. mysql을 쓰다가 postgres로 쉽게 변경이 가능하다.
 - JDBC는 데이터베이스에 대한 연결, 쿼리 실행, 결과 처리 등을 처리하기 위한 인터페이스와 클래스를 제공한다.
+- Spring JDBC는 JDBC를 더 쉽고 효율적이게 사용할 수 있도록 도와준다.
 
-* Spring JDBC는 JDBC를 더 쉽고 효율적이게 사용할 수 있도록 도와준다.ㅌㄴ
+
+**서버가 데이터베이스와 통신할 때 아래와 같은 과정이 진행된다.**
+1. 커넥션 연결
+    - TCP, IP를 통해 연결
+2. SQL 전달
+    - 연결된 커넥션으로 서버에 SQL 쿼리 전달
+3. 결과 응답
+    - 서버는 쿼리를 실행하고 서버에 전달
+
+* JDBC를 사용하면 종속적이지 않은 DB연동을 구현할 수 있다.
+> ex. mysql을 쓰다가 postgres로 쉽게 변경이 가능하다.
+
+- 개발자는 JDBC Interface만 의존하여 코드를 작성하면 된다,
+ JDBC Interface의 구현체는 각 DB별로 가지고 있다. (드라이버)
+- DB 라이브러리를 추가하면 JDBC Driver Manager가 드라이버를 찾아 연결해준다.
+
+### JDBC Drivcer Manager
+- JDBC DriverManager는 url을 분석하여 드라이버 목록을 자동으로 인식하고 관리한다.
+- 이 드라이버들에게 순서대로 데이터베이스 접속 정보를 전달해 커넥션을 획득할 수 있는지 확인한다.
+
+```java
+Connection connection = DriverManager.getConnection(url, db_username, db_password);
+```
+
+```java
+public class DatabaseConnection {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/testdb"; 
+        String username = "root"; 
+        String password = "12345"; 
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+
+            if (connection != null) {
+                System.out.println("데이터베이스 연결 성공!");
+                // 작업 수행
+                connection.close();
+            } else {
+                System.out.println("데이터베이스 연결 실패!");
+            }
+    }
+}
+```
 
 **JdbcTemplate** 같은 객체를 사용하면 JDBC 작업을 간편하게 수행할 수 있게 도와준다.
 
