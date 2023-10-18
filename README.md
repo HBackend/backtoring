@@ -41,8 +41,7 @@ Spring, Spring Boot | ✅
 DTO, DAO, VO, Entity | ✅
 JDBC, DataSource | ✅
 Spirng Data JPA, ORM | ✅
-Spring IoC, DI, Bean | ❌
-Application Context | ❌
+Spring IoC, DI, Bean, Application Context | ❌
 RequestBody, ResponseBody | ❌
 Spring URL HandlerMapping | ❌
 Spring Security | ❌
