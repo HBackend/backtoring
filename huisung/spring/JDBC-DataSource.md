@@ -117,8 +117,23 @@ datasource:
   driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 
-- 커넥션 풀링을 관리할 수 있어 애플리케이션 성능을 향상 시킬 수 있다.
+- 커넥션 풀링을 쉽게 관리할 수 있어 애플리케이션 성능을 향상 시킬 수 있다.
+  - 여러 커넥션 라이브러리로는 `HikariCP`, `Apache DBCP`, `JDBC Pool` 등이 있다. 
 -  커넥션 풀링은 데이터베이스 연결을 미리 만들어두고 필요할 때 재사용함으로써 더 빠르게 연결할 수 있다.
+
+```java
+BasicDataSource dataSource = new BasicDataSource();
+dataSource.setUrl("jdbc:mysql://localhost:3306/test-db");
+dataSource.setUsername("root");
+dataSource.setPassword("0000");
+
+...
+
+Connection connection1 = dataSource.getConnection();
+Connection connection2 = dataSource.getConnection();
+```
+
+> DataSource를 사용해 각각의 커넥션을 얻는 방법.
 
 ### Connection pool
 - 커넥션 풀은 일정량의 Connection객체를 미리 만들어서 pool에 저장한다.
