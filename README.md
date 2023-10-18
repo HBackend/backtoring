@@ -39,8 +39,8 @@ SOLID 원칙 | ❌
 --|--
 Spring, Spring Boot | ✅
 DTO, DAO, VO, Entity | ✅
-JDBC, DataSource | ❌
-Spirng Data JPA, ORM | ❌
+JDBC, DataSource | ✅
+Spirng Data JPA, ORM | ✅
 Spring IoC, DI, Bean | ❌
 Application Context | ❌
 RequestBody, ResponseBody | ❌
