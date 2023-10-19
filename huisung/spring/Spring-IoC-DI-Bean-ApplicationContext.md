@@ -1,0 +1,108 @@
+# Spring IoC, DI, Bean, Application Context	
+
+## Spring DI
+> Dependency Injection
+
+- DI는 스프링이 지원하는 의존 관계 주입 기능이다.
+- 객체를 직접 생성(new 키워드)하는 것이 아니라 외부(IOC컨테이너)에서 생성한 후 주입 시켜주는 방법이다.
+- DI로 모듈간의 결합도를 낮출 수 있다.
+- 주입 방법으로는 필드주입, 생성자 주입, setter 주입이 있다.
+
+```java
+public class Person() {
+    @Autowired
+    private Student s;
+}
+```
+
+- 스프링에선 이렇게 주입당하는 객체를 빈이라고 부르며, 빈 객체를 등록하면 스프링 컨테이너에서 빈의 생성부터 소멸까지의 과정을 모두 관리한다.
+
+## Spring Bean
+- 스프링 컨테이너가 관리하는 객체를 빈 이라고 한다.
+
+### 빈 등록 방법
+
+`@Configuration`
+
+- 클래스에 붙이는 어노테이션
+- @Bean을 사용할 때 함께 사용해 주어야 한다.
+
+`@Bean`
+
+- 메소드에 붙이는 어노테이션
+- 메소드에서 반환되는 객체를 스프링 빈에 등록한다.
+
+`@Service / @Repository`
+
+- 개발자가 직접만든 클래스를 빈으로 등록할 때 사용
+
+`@Configuration / @Bean`
+
+- 외부 라이브러리, 프레임워크에서 만든 클래스를 등록할 때 주로 사용한다.
+
+`@Component`
+
+- 주어진 클래스를 컴포넌트로 간주한다.
+- 이 클래스들은 스프링 서버가 뜰 때 자동으로 감지된다. 스프링 빈이 됨
+- 컨트롤러 서비스 리포지토리가 모두 아니고 개발자가 직접 작성한 클래스를 스프링 빈으로 등록할 때 사용하기도 한다.
+
+## Spring IoC
+> Inversion of Control
+
+- 제어의 역전이라는 의미로 객체의 호출 작업을 개발자가 아니라, 스프링에서 결정하는 것이다 (제어권이 바뀌어진다).
+- 객체의 생성부터 생명주기에 대한 모든 제어의 권한이 바뀌었다는 것이다.
+
+```java
+public interface BookRepository {
+    void saveBook();
+}
+```
+- 예시로 이렇게 BookRepository 인터페이스가 있다.
+
+```java
+@Service
+public class BookService {
+
+    private final BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    public void saveBook() {
+        bookRepository.saveBook();
+    }
+}
+```
+- 이렇게 bookRepository 를 DI 한다.
+
+```java
+@Repository
+public class BookMemoryRepository implements BookRepository {
+
+    @Override
+    public void saveBook() {
+        System.out.println("BookMemoryRepository");
+    }
+
+}
+```
+
+```java
+@Primary
+@Repository
+public class BookMysqlRepository implements BookRepository {
+    @Override
+    public void saveBook() {
+        System.out.println("BookMysqlRepository");
+    }
+}
+```
+
+- 이렇게 두개의 구현체가 있으면, 컨테이너가 BookMysqlRepository 또는 BookMysqlRepository 를 선택하여 BookService에 만들어 준다.
+
+
+## ApplicationContext
+
+- BeanFactory 는 스프링 컨테이너의 최상위 인터페이스 이며 스프링 빈을 관리하고 조회하는 역할을 수행한다. ApplicationContext는 BeanFactory의 하위 인터페이스로 여러 기능이 추가 되어있는 인터페이스 이다.
+- BeanFactory를 직접 사용하는 경우는 거의 없고 ApplicationContext를 사용하기 때문에 ApplicationContext를 스프링 컨테이너라 한다.
