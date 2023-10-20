@@ -20,6 +20,33 @@ public class Person() {
 ## Spring Bean
 - 스프링 컨테이너가 관리하는 객체를 빈 이라고 한다.
 
+### 스프링 빈 라이프사이클
+1. 스프링 IoC 컨테이너 생성
+   - 가장 처음에는 컨테이너가 생성되는 과정이 일어난다.
+2. 스프링 빈 생성
+   - 스프링에서 컴포넌트 스캔으로 Bean들을 스프링 컨테이너안에 등록시킨다.
+3. 의존관계 주입
+   - IoC 컨테이너에서 클래스의 의존관계를 보고 의존성을 주입해준다.
+4. 초기화 콜백 실행
+   - 콜백 메서드 : 특정 이벤트가 실행되고 실행되는 메서드
+   - 인터페이스, 설정 정보에 추가, @PostConstrucy, @PreDestroy 로 빈 생명주기 콜백을 관리한다.
+   - ```java
+     public class ExampleBean {
+     @PostConstruct
+         public void init()  {
+             // 초기화 콜백
+         }
+    
+     @PreDestroy
+         public void close() t {
+             // 소멸 전 콜백
+         }
+     }
+     ```
+5. 사용
+6. 소멸 전 콜백 실행
+7. 종료
+
 ### 빈 등록 방법
 
 `@Configuration`
