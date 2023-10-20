@@ -52,7 +52,8 @@ public class Service {
 ### Bean 이란?
 
 스프링 컨테이너(즉 ApplicationContext) 에 의해 생성, 관리되는 인스턴스화 된 객체  
-주로 `@Component`, `@Service`, `@Repository`, `@Controller`와 같은 어노테이션을 통한 컴포넌트 스캔 방식으로 주로 빈이 생성되지만 직접 코드를 작성하여 수동으로 빈을 등록하는 방법도 있다
+주로 `@Component`, `@Service`, `@Repository`, `@Controller`와 같은 어노테이션을 통한 컴포넌트 스캔 방식으로 주로 빈이 생성되지만
+xml 설정파일에서 직접 클래스를 빈으로 등록하고 의존성을 주입하는 방식, 또는 Java Config 파일에서 Java 코드로 빈 설정을 직접 하는 방법도 있다
 
 그리고 이렇게 생성된 빈은 필요한경우 **컨테이너에 의해 의존성 주입**을 받는다
 
