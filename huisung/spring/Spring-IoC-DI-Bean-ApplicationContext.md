@@ -71,6 +71,30 @@ public class Person() {
 public class ILoveBean {}
 ```
 
+### Singleton 스코프 빈 내부에 prototype의 빈을 주입받는 경우
+- 프로토타입빈은 싱글톤빈 내에서 관리되어지기 때문에 매번 새로운 빈을 정의하지 않고 싱글톤과 함께 계속 유지된다.
+```java
+class SBean {
+    @Autowired
+    private final PBean pBean;
+    
+   ...
+}
+```
+
+### 해결방법
+
+#### ObjectProvider
+- ObjectProvider를 사용하여 매번 빈을 주입하는 방법이다.
+```java
+class SBean {
+    @Autowired
+    private final ObjectProvider<PBean> pBean;
+    
+   ...
+}
+```
+
 ### 빈 등록 방법
 
 `@Configuration`
