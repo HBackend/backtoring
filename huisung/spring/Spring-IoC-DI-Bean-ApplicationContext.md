@@ -87,7 +87,7 @@ class SBean {
 #### ObjectProvider
 - `ObjectProvider`를 사용하여 매번 빈을 주입하는 방법이다.
 - `ObjectProvider`는 `ObjectFactory`라는 어노테이션에 편의 기능들을 추가한 것이다.
-     - `ObjectFactory` : 지정한 빈을 컨테이ㅇ너에서 대신 찾아주는 역할을 한다.
+     - `ObjectFactory` : 지정한 빈을 컨테이너에서 대신 찾아주는 역할을 한다.
 ```java
 class SBean {
     @Autowired
