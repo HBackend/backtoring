@@ -32,15 +32,15 @@ public class Person() {
    - 인터페이스, 설정 정보에 추가, @PostConstrucy, @PreDestroy 로 빈 생명주기 콜백을 관리한다.
    - ```java
      public class ExampleBean {
-     @PostConstruct
-         public void init()  {
-             // 초기화 콜백
-         }
+        @PostConstruct
+        public void init()  {
+            // 초기화 콜백
+        }
     
-     @PreDestroy
-         public void close() t {
-             // 소멸 전 콜백
-         }
+        @PreDestroy
+        public void close() {
+            // 소멸 전 콜백
+        }
      }
      ```
 5. 사용
