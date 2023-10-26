@@ -1,6 +1,12 @@
 ## Spring URL Handler Mapping
 
-#### Spring URL Handler Mapping 이란?
+## DispatcherServlet이란?
+
+DispatcherServlet(프론트 컨트롤러)는 클라이언트로부터 요청을 받았을 때 등록된 핸들러 매핑 전략 중 하나를 선택하여 요청을 처리할 적절한 컨트롤러를 찾음
+
+핸들러 매핑 기능 자체를 직접 구현하기 보다는, 핸들러 매핑 전략을 활용하여 요청을 적절한 컨트롤러로 지정해주는 역할이다
+
+## Spring URL Handler Mapping 이란?
 
 Spring MVC 패턴에서 클라이언트의 request를 받았을 때  
 요청받은 url를 기반으로 **해당 요청을 어떤 Controller의 어떤 메소드에서 처리할 것인지를 결정**하는 것
