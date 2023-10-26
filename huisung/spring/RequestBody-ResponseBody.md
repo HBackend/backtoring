@@ -49,10 +49,28 @@ public MemberDto getMember() {
 ```
 - 이렇게 사용하면 자바 객체를 응답 http body 데이터 형식으로 변환된다.
 
+
+### HTTP 메시지 컨버터
+- HTTP 요청 또는 응답의 바디의 JSON 데이터를 객체로 변환하거나, 객체를 HTTP 요청 또는 응답의 바디의 JSON으로 변환하는 기능을 제공한다.
+- JSON 데이터를 HTTP 메시지 바디에서 직접 읽거나 쓰는 경우 HTTP 메시지 컨버터를 사용할 수 있다.
+- HttpMessageConverter 인터페이스에 read(), write() 등 메시지를 읽고 쓸 수 있는 기능 같은 메서드들이 선언되어있다.
+
+### ArgumentResolver
+- ArgumentResolver 를 호출하여 다양한 파라미터를 생성하여 컨트롤러에게 넘겨준다.
+
+> ArgumentResolver 를 사용하여 `@RequestParam` 어노테이션을 처리하는 예시이다.
+```java
+@GetMapping("/user")
+public void getUser(@RequestParam("id") int userId) {
+        ...
+}
+```
+
 ### @RestController / ResponseEntity
 
 ### @RestController
 - @RestController 를 컨트롤러 클래스에 작성하면 자동으로 모든 핸들러에 `@ResponseBody` 어노테이션이 적용되어 생략이 가능하다.
+
 
 ```java
 @RestController
