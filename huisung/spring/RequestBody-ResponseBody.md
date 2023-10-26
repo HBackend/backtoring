@@ -32,6 +32,7 @@ public class SaveMemberRequest {
 
 - 위의 json 데이터가 해당 객체와 매핑된다.
 
+
 ## `@ResponseBody`
 - @RequesyBody와 반대로 자바 객체를 json 데이터 형태로 변환하여 http body에 담는 어노테이션이다.
 ```java
@@ -85,6 +86,11 @@ public MemberDto getMember() {
 
 ...
 ```
+
+
+### @ResponseBody 가 작성된 데이터에 기본 생성자가 필요하다.
+- RestController에서 @ResquestBody를 바인딩 하기 위해 ObjectMapper를 사용하는데 기본 생성자로 해당 dto를 생성하기 때문이다! 
+
 
 ### ResponseEntity
 - 반환값에 상태코드와 데이터 주고 싶을 때 사용한다.
