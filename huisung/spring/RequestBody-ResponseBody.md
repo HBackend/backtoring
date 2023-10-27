@@ -115,3 +115,24 @@ public ResponseEntity<Member> getMember() {
 등 http 상태코드와 데이터를 함께 보낼 수 있다.   
 
 추가로 RequestEntity는 응답 헤더, body 양식을 맞추어 반환해주므로 @ResponseBody를 붙히지 않아도 잘 작동한다.
+
+**ResponseEntity를 사용하지 않고 응답 상태코드를 지정하는 방법**
+
+```java
+@GetMapping("/user")
+void user(HttpServletResponse response) {
+    ...
+    response.setStatus(HttpServletResponse.SC_OK);
+}
+```
+
+- `HttpServletResponse` 를 메서드의 파라미터로 받아와서 직접 응답의 상태코드를 지정할 수 있다.
+
+> `@ResponseStatus` 어노테이션을 사용하여 응답의 상태코드를 지정할 수도 있다.
+```java
+@GetMapping("/user")
+@ResponseStatus(HttpStatus.OK)
+void user( ... ) {
+  ...
+}
+```
