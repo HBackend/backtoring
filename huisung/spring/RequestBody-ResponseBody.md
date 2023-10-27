@@ -87,10 +87,17 @@ public MemberDto getMember() {
 ...
 ```
 
+### @RequestBody의 dto 객체는 기본 생성자와 getter가 필요하다
+- `ObjectMapper` 는 getter/setter 로 dto의 필드를 가져온다.
+- 값을 초기화 해줄때는 reflection을 사용해서 필드에 값을 넣어준다.
+    > reflection : 구체적인 클래스 타입을 몰라도 해당 클래스의 메서드, 필드에 접근할 수 있게 해주는 자바 API
+
 
 ### @ResponseBody 가 작성된 데이터에 기본 생성자가 필요하다.
 - RestController에서 @ResquestBody를 바인딩 하기 위해 ObjectMapper를 사용하는데 기본 생성자로 해당 dto를 생성하기 때문이다! 
 
+#### ObjectMapper
+- JSON to 객체(역직렬화), 객체 to JSON(직렬화) 하기 위헤 사용하는 Jackson 라이브러리의 클래스이다.
 
 ### ResponseEntity
 - 반환값에 상태코드와 데이터 주고 싶을 때 사용한다.
