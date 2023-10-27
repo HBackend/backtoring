@@ -114,7 +114,7 @@ public ResponseEntity<Member> getMember() {
 `ResponseEntity.created( 데이터 )`   
 등 http 상태코드와 데이터를 함께 보낼 수 있다.   
 
-추가로 RequestEntity는 응답 헤더, body 양식을 맞추어 반환해주므로 @ResponseBody를 붙히지 않아도 잘 작동한다.
+추가로 ResponseEntity는 응답 헤더, body 양식을 맞추어 반환해주므로 @ResponseBody를 붙히지 않아도 잘 작동한다.
 
 **ResponseEntity를 사용하지 않고 응답 상태코드를 지정하는 방법**
 
