@@ -31,6 +31,12 @@ try catch, throws, throw | ✅
 객체지향의 4원칙 | ✅
 SOLID 원칙 | ❌
 자바 리플랙션 | ❌
+JVM 메모리 구조 | ❌
+JVM - Runtime Data Area | ❌
+JVM - GC | ❌
+JVM - Class Loader | ❌
+CGLIB, JDK Proxy | ❌
+
 
 <br>
 
@@ -49,6 +55,9 @@ Spring AOP | ❌
 Spring Filter, Interceptor | ❌
 Layerd Architecture | ❌
 Spring Boot 에러 핸들링 | ❌
+Spring @Transactional | ❌
+JPA Persistence Context | ❌
+JPA N + 1, Fetch Join, Entity Graph | ❌
 
 
 <br>
@@ -63,11 +72,14 @@ TCP, UDP | ❌
 TCP/IP | ❌
 HTTP, HTTPS | ❌  
 HTTP Method, Status | ❌
-API, REST API | ❌
+L2, L4, L7 스위치 | ❌
 OSI 7 Layer | ❌
 운영체제란 | ❌
 프로세스와 스레드 | ❌
-교착 상태 | ❌
+CPU Bound, I/O Bound | ❌
+데드락과 방지 방법 | ❌
+뮤텍스, 세마포어 | ❌
+동기와 비동기 | ❌
 
 <br>
 
@@ -83,6 +95,8 @@ DDL, DML, DCL | ❌
 SQL WHERE 조건절 | ❌
 SQL GROUP BY, ORDER BY | ❌
 JOIN | ❌
+Index | ❌
+트랜잭션, 격리수준, 전파 | ❌
 
 
 <br>
