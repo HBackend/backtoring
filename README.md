@@ -48,8 +48,8 @@ DTO, DAO, VO, Entity | ✅
 JDBC, DataSource | ✅
 Spirng Data JPA, ORM | ✅
 Spring IoC, DI, Bean, Application Context | ✅
-RequestBody, ResponseBody | ❌
-Spring URL HandlerMapping | ❌
+RequestBody, ResponseBody | ✅
+Spring URL HandlerMapping | ✅
 Spring Security | ❌
 Spring AOP | ❌
 Spring Filter, Interceptor | ❌
