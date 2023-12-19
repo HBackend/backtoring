@@ -428,3 +428,162 @@ SecurityContext에 등록되어있는 인증 완료된 객체 Authentication의 
 
 이렇게 스프링시큐리티를 알아보았습니다. 스프링 시큐리티를 사용하지 않아도 스프링에서 인증 인가 작업을 구축할 수 있지만 매우 복잡합니다. 스프링 시큐리티에 대한 이해도를 바탕으로 OAuth2.0도 구현해보거나 다양한 기능들을 사용할 수 있습니다.
 
+<br>
+
+## Spring Security 없이 인증/인가 구현하기
+
+눈물을 머금고 해보겠습니다. @miri ^^
+
+Jwt를 발급, 파싱하는 로직은 위에 설명했던 것과 같고 다음과 같은 작업을 해보겠습니다.
+
+스프링 시큐리티 Authentication 없이 현재 로그인된 사용자 식별
+
+스프링 시큐리티 UserDetails의 Role을 저장하지않고 엔드포인트에 관한 인가작업
+
+### 로그인된 사용자 식별
+
+```java
+@Getter
+@RequiredArgsConstructor
+public class AuthenticatedUser {
+	private Long userId;
+	private Set<Authority> roles;
+}
+```
+
+유저의 id와 역할들을 Set으로 담고있는 클래스를 생성해주었습니다. 간단한 예시이기 때문에 2개만 넣었지만 요구사항에 따라 더 추가될 수 있습니다.
+
+
+```java
+@Component
+@RequiredArgsConstructor
+public class VerifyLoginFilter implements Filter {
+
+	public static final String AUTHENTICATED_USER = "authentcated_user"
+	private final ObjectMapper objectMapper;
+
+	private final UserService userService;
+
+	@Override
+	public void doFilter(
+	ServletRequest request,
+	ServletResponse response, 
+	FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		
+		// post로 들어온 요청이라면
+		if(httpRequest.getMethod().equals("POST")) {
+			try {
+				// request의 body를 읽어오고
+				LoginRequest loginRequest = objectMapper.readValue(request.getReader(), LoginRequest.class);
+				// 로그인 검증 작업을 처리 후
+				LoginResponse loginResponse = userService.어쨋든로그인검증작업(loginRequest);
+				// 성공한 유저였다면
+				if(loginResponse.isSuccessValid()) {
+					// request에 아까 만들어둔 Authentcated_user 객체를 바디에 담아서 보내줌
+					request.setAttribute(AUTHENTICATED_USER, new AuthenticatedUser(loginRequest.getUserId(), loginRequest.getUserRoles()))
+				} else {
+				// 실패하면 예외 처리
+				// throw Excepion
+				}
+				chain.doFilter(request, response)
+			} catch(Exception e) {
+				HttpServletResponse httpResponse = (HttpServletResponse) response;
+				httpResponse.sendError(HttpStatus.BAD_REQUEST.value());
+			}
+		}
+	}
+
+
+```
+
+이렇게 필터를 통해 로그인 검증처리를 할 수 있다
+
+
+이제 설정한 url에 대한 접근 권한 인가처리를 진행해봅시다. 이번에도 필터를 하나 만들게요
+
+```java
+```java
+@Component
+@RequiredArgsConstructor
+public class JwtAuthorizationFilter implements Filter {
+    // 설정할 url 배열
+    private final String[] whiteListUris = new String[]{"/user","/auth/login","/user/hello","*/h2-console*"};
+
+    private final JwtProvider jwtProvider;
+
+    private final ObjectMapper objectMapper;
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+        if(whiteListCheck(httpServletRequest.getRequestURI())){
+            chain.doFilter(request, response);
+            return;
+        }
+        if(!isContainToken(httpServletRequest)){
+            httpServletResponse.sendError(HttpStatus.UNAUTHORIZED.value(), "인증 오류");
+            return;
+        }
+        try{
+            String token = getToken(httpServletRequest);
+            AuthenticateUser authenticateUser = getAuthenticateUser(token);
+            verifyAuthorization(httpServletRequest.getRequestURI(),authenticateUser);
+            log.info("값 : {}",authenticateUser.getEmail());
+            chain.doFilter(request, response);
+        } catch (JsonParseException e){
+            log.error("JsonParseException");
+            httpServletResponse.sendError(HttpStatus.BAD_REQUEST.value());
+        } catch (SignatureException | MalformedJwtException | UnsupportedJwtException e){
+            log.error("JwtException");
+            httpServletResponse.sendError(HttpStatus.UNAUTHORIZED.value(), "인증 오류");
+        } catch (ExpiredJwtException e){
+            log.error("JwtTokenExpired");
+            httpServletResponse.sendError(HttpStatus.FORBIDDEN.value(), "토큰이 만료 되었습니다");
+        } catch (AuthorizationException e){
+            log.error("AuthorizationException");
+            httpServletResponse.sendError(HttpStatus.UNAUTHORIZED.value(), "권한이 없습니다");
+        }
+    }
+
+    private boolean whiteListCheck(String uri){
+        return PatternMatchUtils.simpleMatch(whiteListUris,uri);
+    }
+    
+	// authroization header가 있는지에 대한 검증
+    private boolean isContainToken(HttpServletRequest request){
+        String authorization = request.getHeader("Authorization");
+        return authorization != null && authorization.startsWith("Bearer ");
+    }
+
+	// token의 Bearer를 때고 값을 가져옴
+    private String getToken(HttpServletRequest request){
+        String authorization = request.getHeader("Authorization");
+        return authorization.substring(7);
+    }
+
+	// token claim에 들어있는 authenticate user (userId, roles)를 가져옴
+	// claim 설정은 따로 JwtGenerator에서 진행해줘야합니다. 관련 값 body에 담아주기
+    private AuthenticateUser getAuthenticateUser(String token) throws JsonProcessingException {
+        Claims claims = jwtProvider.getClaims(token);
+        String authenticateUserJson = claims.get(VerifyUserFilter.AUTHENTICATE_USER, String.class);
+        return objectMapper.readValue(authenticateUserJson, AuthenticateUser.class);
+    }
+
+	// 여기서는 어드민에 관한 role이 있는지에 대한 인가처리를 진행합니다.
+    private void verifyAuthorization(String uri, AuthenticateUser user){
+        if(PatternMatchUtils.simpleMatch("*/admin*",uri) && !user.getRoles().contains(Role.ADMIN)){
+            throw new AuthorizationException();
+        }
+    }
+}
+```
+
+이렇게 스프링 시큐리티 없이는 필터를 만들어서 사용하는 방식이 있을 수 있습니다.
+
+스프링 시큐리티의 Authentication 객체는 저희가 AuthenticateUser를 만들어서 필터를 통해 http request로 온 유저가 로그인에 성공한 유저라면 setAttribute를 통해 AuthenticateUser를 추가해줘 로그인 사용자의 정보를 사용할 수 있습니다.
+
+인가작업도 귀찮지만 Filter를 통해서 패턴이 매치되는지, url이 들어있는지에 대한 로직을 작성해야합니다.
+
+이렇게 보면 스프링시큐리티에 대한 강력한 힘을 다시금 깨달을 수 있겠죠?
