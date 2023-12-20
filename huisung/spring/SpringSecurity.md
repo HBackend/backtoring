@@ -89,7 +89,7 @@
 - 구글 서버는 두개로 나누어볼 수 있으며 인증을 검증하고 권한을 부여하는 주체인 **Authrization Server**와
 - 인가를 수행하고 리소스를 제공하는 주체인 **Resource Server**가 있습니다.
 
-![스크린샷 2023-12-20 오전 11.12.12.png](..%2F..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fvr%2Fjpl0yygs1z74fr_t5kcnj8b80000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_XaBN50%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-12-20%20%EC%98%A4%EC%A0%84%2011.12.12.png)
+![](https://interesting-jackrabbit-80c.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F3ad1f604-bb8b-4a0c-8d3a-aab5c473bf7d%2F762bd236-c954-4cfa-8527-d70f34e4a146%2FUntitled.png?table=block&id=c03453bc-48f1-4ca7-9333-6380aa239a58&spaceId=3ad1f604-bb8b-4a0c-8d3a-aab5c473bf7d&width=2000&userId=&cache=v2)
 
 > user agent 는 웹 브라우저라고 생각하면 편합니다.
 
@@ -122,7 +122,9 @@ response_type=code
 - 인증이 끝난다면 Authorization Server가 Client에 Access Token을 발급해줍니다.
 
 ### Using Resource
-![스크린샷 2023-12-20 오전 11.26.46.png](..%2F..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fvr%2Fjpl0yygs1z74fr_t5kcnj8b80000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_eFmgtz%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-12-20%20%EC%98%A4%EC%A0%84%2011.26.46.png)
+
+![](https://interesting-jackrabbit-80c.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F3ad1f604-bb8b-4a0c-8d3a-aab5c473bf7d%2F56fa2424-b3cf-4aea-bb89-5acea2a3e81f%2FUntitled.png?table=block&id=6746aceb-9ef5-46a5-95b9-0343a5f374b9&spaceId=3ad1f604-bb8b-4a0c-8d3a-aab5c473bf7d&width=2000&userId=&cache=v2)
+
 - Resource Owner가 Client에 리소스가 필요한 작업을 요청보냅니다.
 - Client는 Resource Server에 Access Token과 함께 리소스를 요청합니다.
 - Resource Server가 Access Token을 검증 후 리소스를 반환해줍니다.
@@ -345,6 +347,76 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
 - DefaultOAuth2UserService로 OAuth2User를 불러옵니다. 불러온 OAuth2User에서 사용자의 정보들을 이용하여 User 객체를 생성하고 사용자 정보를 이용하여 JWT 토큰을 발급받아 response 쿠키에 저장합니다.
 - 그 후 DefaultOAuth2User형태로 유저 정보를 감싸서 return 해줍니다.
 - 해당 부분에서 유저의 이메일이 학교 이메일인지 검사하는 로직도 포함되어있습니다.
+
+## OpenAPI + OAuth
+- OAthClient 라이브러리를 사용하지 않고 OpenAPI를 사용해서 Google OAuth를 사용할 수 있습니다.
+- 클라이언트로 부터 전달받은 AccessToken을 사용해 리소스를 불러오기 위해 HTTP요청을 보낼 수 있는 도구들이 RestTemplate이나 FeignClient같은 라이브러리를 사용할 수 있습니다.
+- FeignCient는 넷플릭스에서 만들었습니다.
+
+### AccessToken 발급
+
+- Client에서 전달받은 url을 통해 구글 로그인을 진행한 후 code를 받아온 후 code와 함께 AccessToken 발급 요청을 보냅니다.
+
+**요청**
+```java
+https://accounts.google.com/o/oauth2/auth
+        
+?response_type=code
+&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile // 이메일과 유저정보
+&client_id=클라이언트ID
+&redirect_uri=리다이렉트URI
+```
+
+**응답**
+```java
+https://리다이렉트URI
+?access_token=AccessToken
+&token_type=토큰타입
+&scope=email%20profile%20openid%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email&authuser=0&prompt=consent
+```
+
+
+### 리소스 요청
+
+- 받아온 AccessToken으로 유저의 리소스를 요청해 받아올 수 있습니다.
+
+**요청**
+```java
+https://www.googleapis.com/oauth2/v1/userinfo?access_token=ACCESSTOKEN
+```
+
+**응답**
+```json
+{
+  "id" : 1,
+  "email" : "s23012@gsm.hs.kr",
+  ...
+}
+```
+
+---
+
+
+```java
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/auth")
+public class AuthController {
+
+    private final GoogleAuthService googleAuthService;
+    private final AuthService authService;
+
+    @GetMapping("/google/link")
+    public OauthLinkResponse getGoogleClientId() {
+        return googleAuthService.getGoogleLoginLink();
+    }
+
+    @GetMapping("/oauth/google/token")
+    public TokenResponse oauthSignIn(@RequestParam(name = "code", required = true) String code) {
+        return googleAuthService.oauthGoogleSignIn(code);
+    }
+}
+```
 
 ### JWT
 ```java
