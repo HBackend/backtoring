@@ -93,7 +93,7 @@
 
 > user agent 는 웹 브라우저라고 생각하면 편합니다.
 
-### Authrization Grant
+### Authorization Grant
 - Resource Owner가 Client에 OAuth요청을 보냅니다.
 - Client가 user agent 에 로그인 url을 제공해줍니다.
 - user agent는 url를 이용하여 로그인 페이지를 제공받는다.
@@ -113,13 +113,13 @@ response_type=code
 **redirect_uri** : 권한을 받환받는 uri     
 **scope** : 허용한 권한들
 
-- 여기서 주의깊게 봐야한 부분은 **Client는 로그인 페이지만 제공**해주고 **실제 인증 부분은 Resource Owner나 Authrization 서버에서만 처리됩니다!**
+- 여기서 주의깊게 봐야한 부분은 **Client는 로그인 페이지만 제공**해주고 **실제 인증 부분은 Resource Owner나 Authorization 서버에서만 처리됩니다!**
 > 인증과 인가의 대상이 분리되었습니다!   
 > OAuth가 탄생한 가장 큰 이유인 인증은 유저가 권한은 서버가 갖는 flow가 적용되었습니다.
 
-- 인증이 유효하다고 판단되면 Authrization Server에서 Authorization code를 반환해줍니다.
-- Client는 받은 Authorization code를 사용하여 Authrization Server에 Access Token 발급을 요청합니다.
-- 인증이 끝난다면 Authrization Server가 Client에 Access Token을 발급해줍니다.
+- 인증이 유효하다고 판단되면 Authorization Server에서 Authorization code를 반환해줍니다.
+- Client는 받은 Authorization code를 사용하여 Authorization Server에 Access Token 발급을 요청합니다.
+- 인증이 끝난다면 Authorization Server가 Client에 Access Token을 발급해줍니다.
 
 ### Using Resource
 ![스크린샷 2023-12-20 오전 11.26.46.png](..%2F..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fvr%2Fjpl0yygs1z74fr_t5kcnj8b80000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_eFmgtz%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-12-20%20%EC%98%A4%EC%A0%84%2011.26.46.png)
