@@ -79,10 +79,63 @@
 또 사용자의 이름이나 이메일같은 사용자 정보를 가져오는 작업같은 권한을 제공해줍니다.
 - 인증은 유저가 직접 권한은 서비스에게 제공을 하는 방식합니다.
 
+### OAuth2.0 FLOW
+- Oauth에는 총 4가지의 flow들이 있지만 그 중 많이 사용되는 Authorization code flow에 대해 셜명해보겠습니다.
+
+### Google OAuth Authorization code flow
+- OAuth를 진행에 참여하는 주체는 간단하게 유저, 서버, 구글서버 이렇게 나눌 수 있습니다.
+- **유저**는 인증을 수행하는 주체이며 **Resource Owner** 라고 부릅니다.
+- **서버**는 권한을 위임받는 주체이며 **Client** 라고 부릅니다.
+- 구글 서버는 두개로 나누어볼 수 있으며 인증을 검증하고 권한을 부여하는 주체인 **Authrization Server**와
+- 인가를 수행하고 리소스를 제공하는 주체인 **Resource Server**가 있습니다.
+
+![스크린샷 2023-12-20 오전 11.12.12.png](..%2F..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fvr%2Fjpl0yygs1z74fr_t5kcnj8b80000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_XaBN50%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-12-20%20%EC%98%A4%EC%A0%84%2011.12.12.png)
+
+> user agent 는 웹 브라우저라고 생각하면 편합니다.
+
+### Authrization Grant
+- Resource Owner가 Client에 OAuth요청을 보냅니다.
+- Client가 user agent 에 로그인 url을 제공해줍니다.
+- user agent는 url를 이용하여 로그인 페이지를 제공받는다.
+
+
+**url의 구조**   
+```java
+http:// ... ?   
+response_type=code    
+&client_id=쿨리이언트id   
+&redirect_uri=리다이렉트uri   
+&scope=스코프
+```
+
+**response_type** : oauth flow의 authorization code    
+**client_id** : 식별자   
+**redirect_uri** : 권한을 받환받는 uri     
+**scope** : 허용한 권한들
+
+- 여기서 주의깊게 봐야한 부분은 **Client는 로그인 페이지만 제공**해주고 **실제 인증 부분은 Resource Owner나 Authrization 서버에서만 처리됩니다!**
+> 인증과 인가의 대상이 분리되었습니다!   
+> OAuth가 탄생한 가장 큰 이유인 인증은 유저가 권한은 서버가 갖는 flow가 적용되었습니다.
+
+- 인증이 유효하다고 판단되면 Authrization Server에서 Authorization code를 반환해줍니다.
+- Client는 받은 Authorization code를 사용하여 Authrization Server에 Access Token 발급을 요청합니다.
+- 인증이 끝난다면 Authrization Server가 Client에 Access Token을 발급해줍니다.
+
+### Using Resource
+![스크린샷 2023-12-20 오전 11.26.46.png](..%2F..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fvr%2Fjpl0yygs1z74fr_t5kcnj8b80000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_eFmgtz%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-12-20%20%EC%98%A4%EC%A0%84%2011.26.46.png)
+- Resource Owner가 Client에 리소스가 필요한 작업을 요청보냅니다.
+- Client는 Resource Server에 Access Token과 함께 리소스를 요청합니다.
+- Resource Server가 Access Token을 검증 후 리소스를 반환해줍니다.
+> 여기서 이야기하는 리소르는 구글 Oauth라면 사용자의 구글 이메일이나 성별, 나이 같은 구글 서버에서 가지고 있는 사용자의 정보입니다.   
+> 해당 정보는 요청할 수 있는 리소스를 제한하여 특정 리소스만 Client에서 반환받을 수 있게 설정할 수 있습니다. (위에서 언급했던 scope 설정입니다.)
+
+```ref : [10분 테코톡] 홍실의 OAuth 2.0```
+
 ### JWT + OAuth2.0
 - OAuth로 로그인 인증 기능을 구현해도 실제 서비스의 인증 방식은 필요합니다.
 - 세션 쿠키 같은 인증 방식중 JWT를 사용하여 토큰 기반 인증 방식을 사용한 예시를 분석할 예정입니다.
-- 즉 OAuth로는 사용자 이름, 이메일 같은 사용자 정보를 받아오고 서비스의 정보로 사용자를 등록한다. 사용자는 서버에 요청을 보내는 것을 처리할 때는 JWT 같은 인증 방식이 필요하다.
+- 즉 OAuth로는 사용자 이름, 이메일 같은 사용자 정보를 받아오고 서비스의 정보로 사용자를 등록합니다. 사용자는 서버에 요청을 보내는 것을 처리할 때는 JWT 같은 인증 방식이 필요합니다.
+
 
 ### UserDetails, UserDetailsService1
 
